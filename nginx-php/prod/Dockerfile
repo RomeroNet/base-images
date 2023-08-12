@@ -10,4 +10,4 @@ RUN chown 1000 /var/cache/nginx \
 
 USER 1000
 
-ADD docker/prod/nginx/default.conf /etc/nginx/conf.d/default.conf
+ADD default.conf /etc/nginx/conf.d/default.conf
