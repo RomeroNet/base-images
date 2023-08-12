@@ -6,6 +6,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
+  USER: romeronet
+  REPOSITORY: base-images
 
 permissions:
   contents: read
@@ -46,4 +48,4 @@ jobs:
           file: ${{ matrix.image }}/${{ matrix.environment }}/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.image }}-${{ matrix.environment }}:latest
+          tags: ${{ env.REGISTRY }}/${{ env.USER }}/${{ env.REPOSITORY }}/${{ matrix.image }}-${{ matrix.environment }}:latest
