@@ -1,4 +1,4 @@
-FROM php:8.2.8-fpm
+FROM php:8.2.10-fpm
 
 RUN apt-get update && apt-get upgrade -y \
     && rm -rf /var/lib/apt/lists/*
