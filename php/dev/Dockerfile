@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN docker-php-ext-install bcmath pdo pdo_mysql
 
-RUN pecl install xdebug \
+RUN pecl install xdebug-alpha \
     && docker-php-ext-enable xdebug
 
 COPY --from=composer:2.6.5 /usr/bin/composer /usr/bin/composer
