@@ -10,6 +10,7 @@ WORKDIR /android_sdk
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		unzip \
+        git \
     && apt-get upgrade -y \
 	&& rm -rf /var/lib/apt/lists/*
 
