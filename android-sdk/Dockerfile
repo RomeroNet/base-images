@@ -5,7 +5,7 @@ ENV BUILD_TOOLS_VER 35.0.0-rc1
 ENV PLATFORM_VER 34
 ENV BUILD_TOOLS_VER 35.0.0-rc1
 
-WORKDIR /android_sdk
+WORKDIR /app
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
