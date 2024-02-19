@@ -31,3 +31,7 @@ RUN cmdline-tools/latest/bin/sdkmanager \
     "platform-tools"
 
 WORKDIR /app
+
+RUN groupadd -g 121 runner && useradd -u 1001 -g 121 -mr -d /home/runner runner
+
+USER runner
