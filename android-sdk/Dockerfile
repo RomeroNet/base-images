@@ -31,9 +31,9 @@ RUN cmdline-tools/latest/bin/sdkmanager \
     "platform-tools"
 
 RUN groupadd -g 121 github \
-    && useradd -u 1001 -g 121 -mr -d /home/github github \
+    && useradd -u 1001 -g 121 -mr -d /github/home github \
     && chown -R github:github /android_sdk \
-    && chown -R github:github /home/github
+    && chown -R github:github /github/home
 
 WORKDIR /app
 
