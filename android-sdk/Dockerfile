@@ -30,8 +30,11 @@ RUN cmdline-tools/latest/bin/sdkmanager \
     "build-tools;$BUILD_TOOLS_VER" \
     "platform-tools"
 
+RUN groupadd -g 121 github \
+    && useradd -u 1001 -g 121 -mr -d /home/github github \
+    && chown -R github:github /android_sdk \
+    && chown -R github:github /home/github
+
 WORKDIR /app
 
-RUN groupadd -g 121 runner && useradd -u 1001 -g 121 -mr -d /home/runner runner
-
-USER runner
+USER github
