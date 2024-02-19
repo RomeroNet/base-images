@@ -5,11 +5,12 @@ ENV BUILD_TOOLS_VER 35.0.0-rc1
 ENV PLATFORM_VER 34
 ENV BUILD_TOOLS_VER 35.0.0-rc1
 
-WORKDIR /app
+WORKDIR /android_sdk
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		unzip \
+    && apt-get upgrade -y \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN curl https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o sdk.zip \
@@ -27,3 +28,5 @@ RUN cmdline-tools/latest/bin/sdkmanager \
     "sources;android-$PLATFORM_VER" \
     "build-tools;$BUILD_TOOLS_VER" \
     "platform-tools"
+
+WORKDIR /app
