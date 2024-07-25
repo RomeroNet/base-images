@@ -42,7 +42,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Docker image for ${{ matrix.image }} - ${{ matrix.environment }}
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./${{ matrix.image }}/${{ matrix.environment }}
           file: ${{ matrix.image }}/${{ matrix.environment }}/Dockerfile

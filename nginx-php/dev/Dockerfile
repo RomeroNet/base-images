@@ -1,4 +1,4 @@
-FROM nginx:1.25.5
+FROM nginx:1.27.0
 
 RUN apt-get update && apt-get upgrade -y \
     && rm -rf /var/lib/apt/lists/*
