@@ -1,4 +1,4 @@
-FROM php:8.3.9-fpm
+FROM php:8.3.12-fpm
 
 WORKDIR /app
 
@@ -13,5 +13,5 @@ RUN docker-php-ext-install bcmath pdo pdo_mysql
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 
-COPY --from=composer:2.7.7 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.8.1 /usr/bin/composer /usr/bin/composer
 COPY xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
