@@ -52,4 +52,33 @@ jobs:
           file: ${{ matrix.image }}/${{ matrix.environment }}/Dockerfile
           platforms: ${{ matrix.os == 'ubuntu-24.04' && 'linux/amd64' || 'linux/arm64' }}
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.USER }}/${{ env.REPOSITORY }}/${{ matrix.image }}-${{ matrix.environment }}:latest
+          tags: ${{ env.REGISTRY }}/${{ env.USER }}/${{ env.REPOSITORY }}/${{ matrix.image }}-${{ matrix.environment }}:${{ matrix.os }}
+
+  merge-manifests:
+    runs-on: ubuntu-24.04
+    needs: build-web-php
+
+    strategy:
+      matrix:
+        image:
+          - php
+          - nginx-php
+        environment:
+          - dev
+          - prod
+
+    name: Merge both architectures images for ${{ matrix.image }} - ${{ matrix.environment }}
+
+    steps:
+      - name: Log in to container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge and push manifest
+        run: |
+          docker buildx imagetools create -t ${{ env.REGISTRY }}/${{ env.USER }}/${{ env.REPOSITORY }}/${{ matrix.image }}-${{ matrix.environment }}:latest \
+              ${{ env.REGISTRY }}/${{ env.USER }}/${{ env.REPOSITORY }}/${{ matrix.image }}-${{ matrix.environment }}:ubuntu-24.04 \
+              ${{ env.REGISTRY }}/${{ env.USER }}/${{ env.REPOSITORY }}/${{ matrix.image }}-${{ matrix.environment }}:ubuntu-24.04-arm
