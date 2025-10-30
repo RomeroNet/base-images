@@ -1,4 +1,4 @@
-FROM nginx:1.27.4
+FROM nginx:1.29.3
 
 RUN apt-get update && apt-get upgrade -y \
     && rm -rf /var/lib/apt/lists/*
